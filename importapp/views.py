@@ -160,8 +160,15 @@ def message(request):
         message = request.POST.get('message')
         # mail = Xabar.objects.create(User=name, Email=email, Message=message)
         subject = 'Sxbteams.uz saytingidan xabar'
+<<<<<<< HEAD
         for acount in Telegram.objects.all():
             send_to_telegram(f"{subject}\n**Ism:** {name}\n**Email:** {email}\n**Xabar:** {message}", acount.apiToken, acount.chatID)
+=======
+        body = f'Name: {name}\nEmail: {email}\nMessage: {message}'
+        sender_email = settings.EMAIL_HOST_USER
+        recipient_list = ['najmiddinweb@gmail.com']
+        send_mail(subject, body, sender_email, recipient_list, fail_silently=False)
+>>>>>>> d32f3f4 (old)
         messages.success(request, "Muvaffaqiyatli yuborildi!")
         return HttpResponseRedirect(request.META['HTTP_REFERER'])
     except:
@@ -267,9 +274,17 @@ def feedback(request):
         phone = data.get("f-phone")
         subject = data.get("f-subject")
         message = data.get("f-message")
+<<<<<<< HEAD
         subject = 'Sxbteams.uz saytingidan murojatnoma'
         for acount in Telegram.objects.all():
             send_to_telegram(f'{subject}\n**Ism:** {name}\n**Email:** {email}\n**Main subject:** {subject}\n**Xabar:** {message}', acount.apiToken, acount.chatID)
+=======
+        mail_subject = 'Sxbteams.uz saytingidan murojatnoma'
+        body = f'Name: {name}\nEmail: {email}\nMain subject: {subject}\nMessage: {message}'
+        sender_email = settings.EMAIL_HOST_USER
+        recipient_list = ['najmiddinweb@gmail.com']
+        send_mail(mail_subject, body, sender_email, recipient_list, fail_silently=False)
+>>>>>>> d32f3f4 (old)
         AppealOfLegal.objects.create(Subject=flexRadioDefault, FullName=name, BirthDate=date, PassportData=pasId, Address=address, Index=index, Email=email, Phone=phone, SubjectType=subject, QuestionText=message)
         messages.success('Murojatingiz muvaffaqiyatli yuborildi!')
         return render(request, 'feedback.html', context)
@@ -335,8 +350,15 @@ def contact(request):
         message = data.get('modal-message')
         Contact.objects.create(Name=name, Email=email, Company=company, Phone=phone, Message=message)
         subject = "Sxbteams.uz saytingidan sizga so'rov yuborildi!"
+<<<<<<< HEAD
         for acount in Telegram.objects.all():
             send_to_telegram(f'{subject}\n**Ism:** {name}\n**Email:** {email}\n**Phone:** {phone}\n**Xabar:** {message}', acount.apiToken, acount.chatID)
+=======
+        body = f'Name: {name}\nEmail: {email}\nPhone: {phone}\nMessage: {message}'
+        sender_email = settings.EMAIL_HOST_USER
+        recipient_list = ['najmiddinweb@gmail.com']
+        send_mail(subject, body, sender_email, recipient_list, fail_silently=False)
+>>>>>>> d32f3f4 (old)
         messages.success(request, "Muvaffaqiyatli yuborildi!")
         return HttpResponseRedirect(request.META['HTTP_REFERER'])
     context = {

@@ -1,0 +1,1 @@
+from mainfolder.wsgi import application

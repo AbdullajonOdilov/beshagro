@@ -15,7 +15,7 @@ from django.utils.translation import gettext_lazy as _
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['sxbteams.uz']
 
 
 # Application definition
@@ -140,6 +140,17 @@ LOCALE_PATHS = (
     [BASE_DIR, 'locale/']
 )
 
+<<<<<<< HEAD
+=======
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'najmiddinweb@gmail.com'
+EMAIL_HOST_PASSWORD = 'neuzynaaqtoxcvqs'
+
+>>>>>>> d32f3f4 (old)
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
@@ -149,7 +160,7 @@ STATIC_ROOT = BASE_DIR / "static"
 # STATICFILES_DIRS = [BASE_DIR / 'static']
 # STATIC_ROOT ='staticfiles'
 MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, "media")
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 # MEDIA_ROOT = 'media'
 
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
