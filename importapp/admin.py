@@ -1,6 +1,6 @@
 from django.contrib import admin
 from .models import ( Xabar, Hamkor, Product_category_1, Product_category_2, Product, Contact, AboutUs, Work, Employee, Exsport, Import, CustomsClearance, Outsourcing,
-    New, PressCenter_1, PressCenter_2, AppealOfLegal, Corruption, CompanyDetails, Image, PhotoGallery, VideoGallery, Product_image)
+    New, PressCenter_1, PressCenter_2, AppealOfLegal, Corruption, CompanyDetails, Image, PhotoGallery, VideoGallery, Product_image, Telegram)
 from modeltranslation.admin import TranslationAdmin
 from django.utils.html import format_html
 
@@ -180,3 +180,10 @@ class ImageAdmin(admin.ModelAdmin):
     search_fields = ('id', 'Date')
 
 admin.site.register(Image, ImageAdmin)
+
+class TelegramAdmin(admin.ModelAdmin):
+    list_display = ('id', 'apiToken','chatID','Date')
+    ordering = ('-id',)
+    search_fields = ('id', 'Date')
+
+admin.site.register(Telegram, TelegramAdmin)

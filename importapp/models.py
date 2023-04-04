@@ -425,3 +425,12 @@ class Image(models.Model):
     class Meta:
         verbose_name = 'Rasmlar'
         verbose_name_plural = 'G - Web sahifaning asosiy rasmi'
+
+class Telegram(models.Model):
+    apiToken = models.CharField(verbose_name="Api Token", max_length=255)
+    chatID = models.CharField(verbose_name="Chat Id", max_length=255)
+    Date = models.DateTimeField(verbose_name="Date", auto_now_add=True)
+    class Meta:
+        verbose_name = 'Telegram'
+        verbose_name_plural = 'G - Telegram'
+
