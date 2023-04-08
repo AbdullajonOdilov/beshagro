@@ -14,7 +14,7 @@ import requests
 
 def send_to_telegram(message, apiToken, chatID):
     apiURL = f'https://api.telegram.org/bot{apiToken}/sendMessage'
-    try: response = requests.post(apiURL, data={'chat_id': chatID, 'text': message, 'parse_mode': 'HTML'})
+    try: response = requests.post(apiURL, json={'chat_id': chatID, 'text': message})
     except Exception as e: pass
 
 def set_language(request, id):
@@ -158,10 +158,9 @@ def message(request):
         name = request.POST.get('name')
         email = request.POST.get('email')
         message = request.POST.get('message')
-        # mail = Xabar.objects.create(User=name, Email=email, Message=message)
         subject = 'Sxbteams.uz saytingidan xabar'
         for acount in Telegram.objects.all():
-            send_to_telegram(f"{subject}\nIsm: {name}\nEmail: <a href='mailto:{email}'>{email}</a>\nXabar: {message}", acount.apiToken, acount.chatID)
+            send_to_telegram(f"{subject}\nIsm: {name}\nEmail: {email}\nXabar: {message}", acount.apiToken, acount.chatID)
         messages.success(request, "Muvaffaqiyatli yuborildi!")
         return HttpResponseRedirect(request.META['HTTP_REFERER'])
     except:
@@ -269,7 +268,7 @@ def feedback(request):
         message = data.get("f-message")
         subject = 'Sxbteams.uz saytingidan murojatnoma'
         for acount in Telegram.objects.all():
-            send_to_telegram(f"{subject}\nIsm: {name}\nEmail: <a href='mailto:{email}'>{email}</a>\nPhone: {phone}\nMain subject: {subject}\nXabar: {message}", acount.apiToken, acount.chatID)
+            send_to_telegram(f'{subject}\nIsm: {name}\nEmail: {email}\nPhone: {phone}\nMain subject: {subject}\nXabar: {message}', acount.apiToken, acount.chatID)
         AppealOfLegal.objects.create(Subject=flexRadioDefault, FullName=name, BirthDate=date, PassportData=pasId, Address=address, Index=index, Email=email, Phone=phone, SubjectType=subject, QuestionText=message)
         messages.success('Murojatingiz muvaffaqiyatli yuborildi!')
         return render(request, 'feedback.html', context)
@@ -336,7 +335,7 @@ def contact(request):
         Contact.objects.create(Name=name, Email=email, Company=company, Phone=phone, Message=message)
         subject = "Sxbteams.uz saytingidan sizga so'rov yuborildi!"
         for acount in Telegram.objects.all():
-            send_to_telegram(f"{subject}\nIsm: {name}\nEmail: <a href='mailto:{email}'>{email}</a>\nPhone: {phone}\nXabar: {message}", acount.apiToken, acount.chatID)
+            send_to_telegram(f'{subject}\nIsm: {name}\nEmail: {email}\nPhone: {phone}\nXabar: {message}', acount.apiToken, acount.chatID)
         messages.success(request, "Muvaffaqiyatli yuborildi!")
         return HttpResponseRedirect(request.META['HTTP_REFERER'])
     context = {
