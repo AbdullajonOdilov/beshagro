@@ -159,8 +159,10 @@ def message(request):
         email = request.POST.get('email')
         message = request.POST.get('message')
         subject = 'Sxbteams.uz saytingidan xabar'
-        for acount in Telegram.objects.all():
-            send_to_telegram(f"{subject}\nIsm: {name}\nEmail: {email}\nXabar: {message}", acount.apiToken, acount.chatID)
+        if name:
+          for acount in Telegram.objects.all():
+              send_to_telegram(f"{subject}\nIsm: {name}\nEmail: {email}\nXabar: {message}", acount.apiToken, acount.chatID)
+          Xabar.objects.create(User=name, Email=email, Message=message)
         messages.success(request, "Muvaffaqiyatli yuborildi!")
         return HttpResponseRedirect(request.META['HTTP_REFERER'])
     except:
@@ -267,9 +269,10 @@ def feedback(request):
         subject = data.get("f-subject")
         message = data.get("f-message")
         subject = 'Sxbteams.uz saytingidan murojatnoma'
-        for acount in Telegram.objects.all():
-            send_to_telegram(f'{subject}\nIsm: {name}\nEmail: {email}\nPhone: {phone}\nMain subject: {subject}\nXabar: {message}', acount.apiToken, acount.chatID)
-        AppealOfLegal.objects.create(Subject=flexRadioDefault, FullName=name, BirthDate=date, PassportData=pasId, Address=address, Index=index, Email=email, Phone=phone, SubjectType=subject, QuestionText=message)
+        if name:
+          for acount in Telegram.objects.all():
+              send_to_telegram(f'{subject}\nIsm: {name}\nEmail: {email}\nPhone: {phone}\nMain subject: {subject}\nXabar: {message}', acount.apiToken, acount.chatID)
+          AppealOfLegal.objects.create(Subject=flexRadioDefault, FullName=name, BirthDate=date, PassportData=pasId, Address=address, Index=index, Email=email, Phone=phone, SubjectType=subject, QuestionText=message)
         messages.success('Murojatingiz muvaffaqiyatli yuborildi!')
         return render(request, 'feedback.html', context)
 
@@ -334,9 +337,11 @@ def contact(request):
         message = data.get('modal-message')
         Contact.objects.create(Name=name, Email=email, Company=company, Phone=phone, Message=message)
         subject = "Sxbteams.uz saytingidan sizga so'rov yuborildi!"
-        for acount in Telegram.objects.all():
-            send_to_telegram(f'{subject}\nIsm: {name}\nEmail: {email}\nPhone: {phone}\nXabar: {message}', acount.apiToken, acount.chatID)
-        messages.success(request, "Muvaffaqiyatli yuborildi!")
+        if name:
+          for acount in Telegram.objects.all():
+              send_to_telegram(f'{subject}\nIsm: {name}\nEmail: {email}\nPhone: {phone}\nXabar: {message}', acount.apiToken, acount.chatID)
+          messages.success(request, "Muvaffaqiyatli yuborildi!")
+        
         return HttpResponseRedirect(request.META['HTTP_REFERER'])
     context = {
         'main_images': Image.objects.all().order_by('-id')[0:3],
