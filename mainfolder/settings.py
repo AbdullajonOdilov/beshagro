@@ -15,7 +15,7 @@ from django.utils.translation import gettext_lazy as _
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['sxbteams.uz', 'https://sxbteams.uz','http://sxbteams.uz','https://www.sxbteams.uz','http://www.sxbteams.uz','www.sxbteams.uz']
+ALLOWED_HOSTS = ['127.0.0.1']
 
 
 # Application definition

@@ -7,7 +7,7 @@ from django.utils.html import format_html
 class XabarAdmin(admin.ModelAdmin):
     list_display = ('id', 'User', 'Email', 'Date', 'Checked')
     ordering = ('-User',)
-    search_fields = ( 'User', 'Email')
+    search_fields = ('User', 'Email')
 
 admin.site.register(Xabar, XabarAdmin)
 
