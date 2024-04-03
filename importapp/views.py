@@ -268,11 +268,13 @@ def feedback(request):
         phone = data.get("f-phone")
         subject = data.get("f-subject")
         message = data.get("f-message")
-        subject = 'Sxbteams.uz saytingidan murojatnoma'
+        subject = 'Beshagroeksport.uz saytingidan murojatnoma'
         if name:
           for acount in Telegram.objects.all():
-              send_to_telegram(f'{subject}\nIsm: {name}\nEmail: {email}\nPhone: {phone}\nMain subject: {subject}\nXabar: {message}', acount.apiToken, acount.chatID)
-          AppealOfLegal.objects.create(Subject=flexRadioDefault, FullName=name, BirthDate=date, PassportData=pasId, Address=address, Index=index, Email=email, Phone=phone, SubjectType=subject, QuestionText=message)
+              send_to_telegram(f'{subject}\nIsm: {name}\nEmail: {email}\nPhone: {phone}\nMain subject:'
+                               f' {subject}\nXabar: {message}', acount.apiToken, acount.chatID)
+          AppealOfLegal.objects.create(Subject=flexRadioDefault, FullName=name, BirthDate=date, PassportData=pasId,
+        Address=address, Index=index, Email=email, Phone=phone, SubjectType=subject, QuestionText=message)
         messages.success('Murojatingiz muvaffaqiyatli yuborildi!')
         return render(request, 'feedback.html', context)
 

@@ -11,6 +11,6 @@ import os
 
 from django.core.asgi import get_asgi_application
 
-environ.setdefault('DJANGO_SETTINGS_MODULE', 'mainfolder.settings')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'mainfolder.settings')
 
 application = get_asgi_application()
